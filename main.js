@@ -8,6 +8,10 @@ function Book(title, author, pages, read) {
 }
 
 
+const book = new Book('harry potter', 'nobody', 300, true);
+
+console.log(book);
+
 function addBookToLibrary() {
-    
+
 }
