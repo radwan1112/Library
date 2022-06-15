@@ -1,3 +1,7 @@
+:root {
+  --main-color: green;
+}
+
 .add-book {
   padding: 20px;
 }
@@ -11,6 +15,12 @@
 .card-body a {
   width: 100%;
   margin-bottom: 10px;
+}
+
+input[type=checkbox] {
+  cursor: pointer;
+  vertical-align: middle;
+  font-size: 20px;
 }
 
 @media (max-width: 600px) {
