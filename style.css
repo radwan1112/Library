@@ -23,6 +23,10 @@ input[type=checkbox] {
   font-size: 20px;
 }
 
+.read-btn {
+  display: none;
+}
+
 @media (max-width: 600px) {
   .grid-container {
     grid-template-columns: repeat(2, 1fr);
