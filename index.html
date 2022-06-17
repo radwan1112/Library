@@ -108,6 +108,7 @@
       </div>
     </main>
 
+
     <div
       class="modal fade"
       id="addToLibrary"
@@ -130,66 +131,139 @@
           </div>
 
           <div class="modal-body">
-            <div class="input-group mb-3">
-              <input
-                id="title"
-                type="text"
-                class="form-control"
-                placeholder="Title"
-                aria-label="Title"
-                aria-describedby="basic-addon1"
-                required
-                minlength="1"
-              />
-            </div>
-            <div class="input-group mb-3">
-              <input
-                id="author"
-                type="text"
-                class="form-control"
-                placeholder="Author"
-                aria-label="Author"
-                aria-describedby="basic-addon1"
-                required
-                minlength="2"
-              />
-            </div>
-            <div class="input-group mb-3">
-              <input
-                id="pages"
-                type="number"
-                class="form-control"
-                placeholder="Pages"
-                aria-label="Pages"
-                aria-describedby="basic-addon1"
-                required
-                min="1"
-              />
-            </div>
+            <form class="g-3 needs-validation" id="addBookForm" novalidate>
+              <div class="mb-3">
+                <label for="title" class="form-label">Book Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="title"
+                  placeholder="Hamlet"
+                  required
+                  maxlength="100"
+                  minlength="1"
+                />
+              </div>
+              <div class="valid-feedback">Valid Title</div>
 
-            <div class="form-check ms-3">
-              <label class="form-check-label" for="flexCheckDefault">
-                Have You Read the Book ?
-              </label>
-              <input
-                class="form-check-input"
-                type="checkbox"
-                value=""
-                id="flexCheckDefault read"
-              />
-            </div>
+              <div class="mb-3">
+                <label for="author" class="form-label">Author Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="author"
+                  placeholder="William Shakespeare"
+                  required
+                  maxlength="100"
+                  minlength="1"
+                />
+              </div>
+              <div class="valid-feedback">Valid Name</div>
+
+              <div class="mb-3">
+                <label for="pages" class="form-label">Pages</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="pages"
+                  placeholder="0"
+                  required
+                  min="1"
+                />
+              </div>
+              <div class="valid-feedback">Valid Number</div>
+
+              <div class="col-12 mb-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="read">
+                  <label class="form-check-label" for="invalidCheck">
+                    Have you Read the Book ? 
+                  </label>
+                </div>
+              </div>
+
+
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button id="add_book" type="submit" class="btn btn-primary">
+                  Submit
+                </button>
+              </div>
+            </form>
+
+            <form class="row g-3">
+              <div class="col-md-4">
+                <label for="validationServer01" class="form-label">First name</label>
+                <input type="text" class="form-control is-valid" id="validationServer01" value="Mark" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="validationServer02" class="form-label">Last name</label>
+                <input type="text" class="form-control is-valid" id="validationServer02" value="Otto" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="validationServerUsername" class="form-label">Username</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text" id="inputGroupPrepend3">@</span>
+                  <input type="text" class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+                  <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                    Please choose a username.
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="validationServer03" class="form-label">City</label>
+                <input type="text" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" required>
+                <div id="validationServer03Feedback" class="invalid-feedback">
+                  Please provide a valid city.
+                </div>
+              </div>
+              <div class="col-md-3">
+                <label for="validationServer04" class="form-label">State</label>
+                <select class="form-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" required>
+                  <option selected disabled value="">Choose...</option>
+                  <option>...</option>
+                </select>
+                <div id="validationServer04Feedback" class="invalid-feedback">
+                  Please select a valid state.
+                </div>
+              </div>
+              <div class="col-md-3">
+                <label for="validationServer05" class="form-label">Zip</label>
+                <input type="text" class="form-control is-invalid" id="validationServer05" aria-describedby="validationServer05Feedback" required>
+                <div id="validationServer05Feedback" class="invalid-feedback">
+                  Please provide a valid zip.
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>
+                  <label class="form-check-label" for="invalidCheck3">
+                    Agree to terms and conditions
+                  </label>
+                  <div id="invalidCheck3Feedback" class="invalid-feedback">
+                    You must agree before submitting.
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-primary" type="submit">Submit form</button>
+              </div>
+            </form>
+            
           </div>
 
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button id="addBook" type="button" class="btn btn-primary">Submit</button>
-          </div>
         </div>
       </div>
     </div>
