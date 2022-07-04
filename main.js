@@ -10,13 +10,16 @@ function Book(title, author, pages, read) {
 function addBookToLibrary() {}
 
 function validate() {
-  
-  const title = document.getElementById('title').value
-  const author = document.getElementById('author').value
-  const pages = document.getElementById('pages').value
-  const read = document.getElementById('read').checked
-  
 
+  const bookForm = document.getElementById("addBookForm");
+
+  if(!bookForm.checkValidity()){
+    console.log('not valid')
+  }
+  const title = document.getElementById('book_title').value;
+  const author = document.getElementById('book_author').value;
+  const pages = document.getElementById('pages').value;
+  const read = document.getElementById('read').checked;
 }
 
 // Example starter JavaScript for disabling form submissions if there are invalid fields
