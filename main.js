@@ -1,15 +1,28 @@
 let myLibrary = []
 
 function Book(title, author, pages, read) {
-  this.title = title
-  this.author = author
-  this.pages = pages
-  this.read = read
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
 }
 
-function addBookToLibrary() {
+function localStore(name, value) {
 
-  
+  const existing = localStorage.getItem(name);
+  existing = existing ? existing.split(',') : [];
+
+  existing.push(value);
+  localStorage.setItem(name, existing.toString());
+
+}
+
+function addBookToLibrary(title, author, pages, read) {
+
+  const book = new Book(title, author, pages, read);
+  myLibrary.push(book);
+  localStore('myLibrary', book);
+  console.log(myLibrary)
 
 }
 
@@ -22,9 +35,10 @@ function validate() {
     const author = document.getElementById('book_author').value;
     const pages = document.getElementById('pages').value;
     const read = document.getElementById('read').checked;
+    addBookToLibrary(title, author, pages, read);
     return true;
   }
-
+  
   else {
     return false;
   }
