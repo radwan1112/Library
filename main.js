@@ -1,45 +1,37 @@
 let myLibrary = []
 
 function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
-
-function localStore(name, value) {
-
-  const existing = localStorage.getItem(name);
-  existing = existing ? existing.split(',') : [];
-
-  existing.push(value);
-  localStorage.setItem(name, existing.toString());
-
+  this.title = title
+  this.author = author
+  this.pages = pages
+  this.read = read
 }
 
 function addBookToLibrary(title, author, pages, read) {
+  const book = new Book(title, author, pages, read)
 
-  const book = new Book(title, author, pages, read);
-  myLibrary.push(book);
-  localStore('myLibrary', book);
-  console.log(myLibrary)
+  if (localStorage.getItem('library') == null) {
+    localStorage.setItem('library', '[]')
+  }
 
+  const old_library = JSON.parse(localStorage.getItem('library'));
+  old_library.push(book);
+
+  localStorage.setItem('library', JSON.stringify(old_library));
 }
+
 
 function validate() {
   const bookForm = document.getElementById('addBookForm')
 
   if (bookForm.checkValidity()) {
-    console.log('valid')
-    const title = document.getElementById('book_title').value;
-    const author = document.getElementById('book_author').value;
-    const pages = document.getElementById('pages').value;
-    const read = document.getElementById('read').checked;
+    const title = document.getElementById('book_title').value
+    const author = document.getElementById('book_author').value
+    const pages = document.getElementById('pages').value
+    const read = document.getElementById('read').checked
     addBookToLibrary(title, author, pages, read);
     return true;
-  }
-  
-  else {
+  } else {
     return false;
   }
 }
