@@ -8,6 +8,63 @@ function Book(id, title, author, pages, read) {
   this.read = read;
 }
 
+
+function view() {
+
+  if (localStorage.getItem('library') == null) {
+    localStorage.setItem('library', '[]')
+  }
+
+  const old_library = JSON.parse(localStorage.getItem('library'));
+  let numOfCard = old_library.length;
+
+  console.log(old_library)
+  console.log(numOfCard)
+
+  for(let i = 0; i<numOfCard; i++){
+
+    const card = document.createElement('div');
+    card.classList.add('card');
+    const body = document.createElement('div');
+    body.classList.add('card-body', 'd-flex', 'flex-column', 'align-items-center')
+    const header = document.createElement('h5');
+    header.classList.add('card-title');
+    header.textContent = old_library[i].title;
+    const name = document.createElement('p');
+    name.classList.add('card-text');
+    name.textContent = old_library[i].author;
+    const pg = document.createElement('p');
+    pg.classList.add('card-text');
+    pg.textContent = old_library[i].pages;
+    const read_button = document.createElement('a');
+    read_button.classList.add('btn');
+    if(old_library[i].read){
+      read_button.textContent = "Read";
+      read_button.classList.add('btn-success');
+    }
+    else{
+      read_button.textContent = "Not Read";
+      read_button.classList.add('btn-danger');
+    }
+    const delete_button = document.createElement('a');
+    delete_button.classList.add('btn', 'btn-secondary');
+    delete_button.textContent = "Delete";
+
+
+    const container = document.getElementById('cards_container');
+    container.appendChild(card);
+    card.appendChild(body);
+    body.appendChild(header);
+    body.appendChild(name);
+    body.appendChild(pg);
+    body.appendChild(read_button);
+    body.appendChild(delete_button);
+
+  }
+
+}
+
+
 function addBookToLibrary(id, title, author, pages, read) {
 
 
@@ -16,8 +73,6 @@ function addBookToLibrary(id, title, author, pages, read) {
   }
 
   const book = new Book(id, title, author, pages, read);
-
-
   const old_library = JSON.parse(localStorage.getItem('library'));
   old_library.push(book);
   localStorage.setItem('library', JSON.stringify(old_library));
@@ -63,3 +118,7 @@ function validate() {
     )
   })
 })()
+
+window.onload = function () {
+  view();
+}
