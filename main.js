@@ -1,4 +1,5 @@
-const container = document.getElementById('cards_container')
+let container = document.getElementById('cards_container')
+let library = JSON.parse(localStorage.getItem('library'))
 
 function Book(id, title, author, pages, read) {
   this.id = id
@@ -9,12 +10,12 @@ function Book(id, title, author, pages, read) {
 }
 
 function removeBook(id) {
-  let old_library = JSON.parse(localStorage.getItem('library'))
-  const new_library = old_library.filter((book) => {
-    return book.id !== id;
-  })
+  library = JSON.parse(localStorage.getItem('library'))
+  console.log(library)
+  let new_library = library.filter((book) => book.id != id)
   localStorage.setItem('library', JSON.stringify(new_library))
-  view();
+
+  view()
 }
 
 function changeStatus() {}
@@ -38,21 +39,21 @@ function addEvent() {
 }
 
 function view() {
+  container.innerText = ''
   if (localStorage.getItem('library') == null) {
     localStorage.setItem('library', '[]')
-    container.innerText = ''
   }
 
-  const old_library = JSON.parse(localStorage.getItem('library'))
-  let numOfCard = old_library.length
+  library = JSON.parse(localStorage.getItem('library'))
+  let numOfCard = library.length
 
-  console.log(old_library)
+  console.log(library)
   console.log(numOfCard)
 
   for (let i = 0; i < numOfCard; i++) {
     const card = document.createElement('div')
     card.classList.add('card')
-    card.dataset.bookId = old_library[i].id
+    card.dataset.bookId = library[i].id
     const body = document.createElement('div')
     body.classList.add(
       'card-body',
@@ -62,16 +63,16 @@ function view() {
     )
     const header = document.createElement('h5')
     header.classList.add('card-title')
-    header.textContent = old_library[i].title
+    header.textContent = library[i].title
     const name = document.createElement('p')
     name.classList.add('card-text')
-    name.textContent = old_library[i].author
+    name.textContent = library[i].author
     const pg = document.createElement('p')
     pg.classList.add('card-text')
-    pg.textContent = old_library[i].pages
+    pg.textContent = library[i].pages
     const read_button = document.createElement('a')
     read_button.classList.add('btn', 'btn_read_status')
-    if (old_library[i].read) {
+    if (library[i].read) {
       read_button.textContent = 'Read'
       read_button.classList.add('btn-success')
     } else {
@@ -91,6 +92,9 @@ function view() {
     body.appendChild(read_button)
     body.appendChild(delete_button)
   }
+  if (container.hasChildNodes()) {
+    addEvent()
+  }
 }
 
 function addBookToLibrary(id, title, author, pages, read) {
@@ -99,9 +103,9 @@ function addBookToLibrary(id, title, author, pages, read) {
   }
 
   const book = new Book(id, title, author, pages, read)
-  const old_library = JSON.parse(localStorage.getItem('library'))
-  old_library.push(book)
-  localStorage.setItem('library', JSON.stringify(old_library))
+  library = JSON.parse(localStorage.getItem('library'))
+  library.push(book)
+  localStorage.setItem('library', JSON.stringify(library))
   view()
 }
 
@@ -146,7 +150,6 @@ function validate() {
 
 window.onload = function () {
   view()
-
   if (container.hasChildNodes()) {
     addEvent()
   }
