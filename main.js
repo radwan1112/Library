@@ -11,14 +11,30 @@ function Book(id, title, author, pages, read) {
 
 function removeBook(id) {
   library = JSON.parse(localStorage.getItem('library'))
-  console.log(library)
   let new_library = library.filter((book) => book.id != id)
   localStorage.setItem('library', JSON.stringify(new_library))
-
   view()
 }
 
-function changeStatus() {}
+function changeStatus(id, status) {
+
+  let new_Status;
+
+  for(let book of library){
+    if(book.id == id){
+      if(status){
+        new_Status = false;
+      }
+      else{
+        new_Status = true;
+      }
+      book.read = new_Status;
+      console.log(book.read, id, book.id, book)
+    }
+  }
+  localStorage.setItem('library', JSON.stringify(library));
+  view();
+}
 
 function addEvent() {
   document.querySelectorAll('.btn_remove_book').forEach((delBtn) => {
@@ -31,9 +47,13 @@ function addEvent() {
 
   document.querySelectorAll('.btn_read_status').forEach((statusBtn) => {
     statusBtn.addEventListener('click', (e) => {
-      console.log(e.target.closest('.card').getAttribute('data-book-id'))
       const book_ID = e.target.closest('.card').getAttribute('data-book-id')
-      changeStatus(book_ID)
+      const book_Status = e.target.textContent
+      if (book_Status == 'Read') {
+        changeStatus(book_ID, true)
+      } else {
+        changeStatus(book_ID, false)
+      }
     })
   })
 }
@@ -46,9 +66,6 @@ function view() {
 
   library = JSON.parse(localStorage.getItem('library'))
   let numOfCard = library.length
-
-  console.log(library)
-  console.log(numOfCard)
 
   for (let i = 0; i < numOfCard; i++) {
     const card = document.createElement('div')
